@@ -1,0 +1,29 @@
+# External hardlinks and options
+global_settings:
+  bucket_name: 'stanford_cardiac_mri'
+  cloud_translate_config: 'projects/som-nero-phi-willhies-mdai/locations/global'
+
+# Device specific options
+jarvis_lambda:
+  tmp_dir: '/mnt/scratch/tmp_extraction'
+  pretrain_dir: '/scratch/pretrain_weights'
+  attn_dir: '/home/rohanshad/Hiesinger Lab Dropbox/MRI ML/attention_maps'
+
+sherlock:
+  tmp_dir: '/lscratch/rshad/tmp_extraction'
+  attn_dir: '/scratch/groups/willhies/ml_attention_maps'
+  pretrain_dir: '/home/groups/willhies/pretrain_weights'
+
+Rohans_MacBook:
+  tmp_dir: '/Users/rohanshad/Downloads/tmp_extraction'
+  pretrain_dir: '/Users/rohanshad/Downloads/pretrain_weights'
+  attn_dir: 'Users/rohanshad/Hiesinger Lab Dropbox/MRI ML/attention_maps'
+
+cubic:
+  tmp_dir: '/scratch/arorar/tmp_extraction'
+  pretrain_dir: '/scratch/arorar/pretrain_weights'
+  attn_dir: '/scratch/arorar/attention_maps'
+
+willhies_mdai_n1_standard_8_r_5_latest:
+  tmp_dir: '/home/rshad_stanford_edu/tmp'
+  attn_dir: '/home/rshad_stanford_edu/tmp/ml_attention_maps'
