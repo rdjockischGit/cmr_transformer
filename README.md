@@ -1,5 +1,5 @@
 ## A Generalizable Deep Learning System for Cardiac MRI
-###### Rohan Shad, Cyril Zakka, Dhamanpreet Kaur, Robyn Fong, Ross Warren Filice, John Mongan, Kimberly Kalianos, Nishith Khandwala, David Eng, Matthew Leipzig, Walter Witschey, Alejandro de Feria, Victor Ferrari, Euan Ashley,  Michael A. Acker, Curtis Langlotz, William Hiesinger
+###### Rohan Shad, Cyril Zakka, Dhamanpreet Kaur, Mrudang Mathur, Robyn Fong, Joseph Cho, Ross Warren Filice, John Mongan, Kimberly Kalianos, Nishith Khandwala, David Eng, Matthew Leipzig, Walter Witschey, Alejandro de Feria, Victor Ferrari, Euan Ashley,  Michael A. Acker, Curtis Langlotz, William Hiesinger
 
 [![arXiv](https://img.shields.io/badge/arXiv-2312.00357-b31b1b.svg)](https://arxiv.org/abs/2312.00357)
 
