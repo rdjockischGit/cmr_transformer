@@ -39,9 +39,27 @@ Using the repo without a `local_config.yaml` file is possible if you hard code t
 
 #### Download Weights
 
-Weights for our pretrained CMR encoders are available on Huggingface for non-commercial use (CC-BY-NC 4.0): https://huggingface.co/rohanshad/cmr_c0.1. 
+Weights for our pretrained CMR encoders are available on Huggingface for non-commercial use (CC-BY-NC 4.0): https://huggingface.co/rohanshad/cmr_c0.1.
 
-#### Install Dependencies 
+#### Quickstart — Just want the encoder?
+
+If you don't need finetuning or the full training pipeline and just want to load the pretrained encoder and generate embeddings from your own data, use `minimal_run.py`. It pulls weights directly from Hugging Face and runs a forward pass with no config files, no W&B setup, and no `local_config.yaml` required.
+
+```bash
+pip install torch torchvision huggingface_hub
+python minimal_run.py
+```
+
+This will download the checkpoint, load the MViT encoder, and run a forward pass on a random `[1, 3, 16, 224, 224]` tensor (batch × RGB × frames × H × W), printing the resulting embedding and its shape. Swap in your own preprocessed HDF5 data in place of `demo_input`.
+
+If you're working from raw DICOM data, run it through [cmr_toolkit](https://github.com/rohanshad/cmr_toolkit) first to produce HDF5 files, then apply spatial transforms before passing to the model:
+
+```python
+from torchvision.transforms import v2
+val_transforms = v2.Compose([v2.Resize(size=244), v2.CenterCrop(size=224)])
+```
+
+#### Install Dependencies
 
 Tested with CUDA on Ubuntu 20.02, 24.04 and CentOS7. 
 
