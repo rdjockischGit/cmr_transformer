@@ -1,12 +1,12 @@
 ## A Generalizable Deep Learning System for Cardiac MRI
 ###### Rohan Shad, Cyril Zakka, Dhamanpreet Kaur, Mrudang Mathur, Robyn Fong, Joseph Cho, Ross Warren Filice, John Mongan, Kimberly Kalianos, Nishith Khandwala, David Eng, Matthew Leipzig, Walter Witschey, Alejandro de Feria, Victor Ferrari, Euan Ashley,  Michael A. Acker, Curtis Langlotz, William Hiesinger
 
-[![arXiv](https://img.shields.io/badge/arXiv-2312.00357-b31b1b.svg)](https://arxiv.org/abs/2312.00357)
+[![Nature Biomedical Engineering](https://img.shields.io/badge/Nature_Biomedical_Engineering-10.1038%2Fs41551--026--01637--3-016795)](https://www.nature.com/articles/s41551-026-01637-3)
 
-#### Project overview: 
+#### Project overview:
 
 ![input_mri](https://github.com/rohanshad/cmr_transformer/blob/760cd4a200155dd95c30f3900594b3127785b001/media/mri_inputs.gif)
-Here we describe a transformer-based vision system that learns complex pathophysiological visual representations from a large multi-institutional dataset of 19,041 CMR scans, guided by natural language supervision from the text reports accompanying each CMR study. We use a large language model to help ‘teach’ a vision network to generate meaningful low-dimensional representations of CMR studies, by showing examples of how radiologists describe what they see while drafting their reports. We utilize a contrastive learning objective using the InfoNCE objective. The video encoder used is an implementation of [MVIT](https://arxiv.org/abs/2104.11227) (Multi-scale vision transformers) initialzed using Kinetics-400 pre-trained weights. The text encoder used is an implementation of [BERT](http://arxiv.org/abs/1810.04805) (Bidirectional encoder representations with transformers) pretrained on [pubmed abstracts](http://arxiv.org/abs/2007.15779) with a custom vocabulary. Please see our [paper](https://arxiv.org/abs/2312.00357) for more. 
+Here we describe a transformer-based vision system that learns complex pathophysiological visual representations from a large multi-institutional dataset of 19,041 CMR scans, guided by natural language supervision from the text reports accompanying each CMR study. We use a large language model to help ‘teach’ a vision network to generate meaningful low-dimensional representations of CMR studies, by showing examples of how radiologists describe what they see while drafting their reports. We utilize a contrastive learning objective using the InfoNCE objective. The video encoder used is an implementation of [MVIT](https://arxiv.org/abs/2104.11227) (Multi-scale vision transformers) initialzed using Kinetics-400 pre-trained weights. The text encoder used is an implementation of [BERT](http://arxiv.org/abs/1810.04805) (Bidirectional encoder representations with transformers) pretrained on [pubmed abstracts](http://arxiv.org/abs/2007.15779) with a custom vocabulary. Please see our [paper](https://www.nature.com/articles/s41551-026-01637-3) for more.
 
 
 #### Video Dataset Structure
@@ -87,14 +87,13 @@ python mri_trainer.py test --config configs/eval_config.yaml
 ### Citation
 If you use this codebase, or otherwise found our work valuable, please cite:
 ```
-@misc{shad2023generalizabledeeplearningcardiac,
-      title={A Generalizable Deep Learning System for Cardiac MRI}, 
+@article{shad2026generalizabledeeplearningcardiac,
+      title={A Generalizable Deep Learning System for Cardiac MRI},
       author={Rohan Shad and Cyril Zakka and Dhamanpreet Kaur and Robyn Fong and Ross Warren Filice and John Mongan and Kimberly Kalianos and Nishith Khandwala and David Eng and Matthew Leipzig and Walter Witschey and Alejandro de Feria and Victor Ferrari and Euan Ashley and Michael A. Acker and Curtis Langlotz and William Hiesinger},
-      year={2023},
-      eprint={2312.00357},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV},
-      url={https://arxiv.org/abs/2312.00357}, 
+      journal={Nature Biomedical Engineering},
+      year={2026},
+      doi={10.1038/s41551-026-01637-3},
+      url={https://www.nature.com/articles/s41551-026-01637-3},
 }
 ```
 
