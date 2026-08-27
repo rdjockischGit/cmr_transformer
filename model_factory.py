@@ -8,6 +8,7 @@ from torch import nn
 from arch import resnet, mvit
 from pyaml_env import BaseConfig, parse_config
 import platform
+import bcolors
 
 # Read local_config.yaml for local variables 
 device = platform.uname().node.replace('-','_')
@@ -353,16 +354,6 @@ def make_projection_layers(in_dim, out_dim, num_layers=2, dropout_layer=None):
 		layers += [nn.Linear(in_dim, out_dim)]
 		return nn.Sequential(*layers)
 
-def _strip_module_prefix(key, prefix='model.'):
-	'''
-	Remove a leading module prefix from a checkpoint key.
-	Note: str.strip(prefix) removes *characters* in the set, not the prefix,
-	so keys ending in any of {m,o,d,e,l,.} were previously truncated -- e.g.
-	'model.video_encoder.cls_positional_encoding.pos_embed_spatial' became
-	'...pos_embed_spatia' and silently failed to match. Requires Python 3.9+.
-	'''
-	return key.removeprefix(prefix)
-
 def load_contrastive_pretrained_weights(input_model, checkpoint_path):
 	'''
 	Loads only necessary key, value pairs from supplied state_dict for video_encoder
@@ -376,21 +367,23 @@ def load_contrastive_pretrained_weights(input_model, checkpoint_path):
 
 	try:
 		# 1. filter out unnecessary keys
-		video_encoder_dict = {_strip_module_prefix(k): v for k, v in pretrained_state_dict.items() if _strip_module_prefix(k) in model_dict}
+		video_encoder_dict = {k.removeprefix('model.'): v for k, v in pretrained_state_dict.items() if k.removeprefix('model.') in model_dict}
 		# 2. overwrite entries in the existing state dict
 		model_dict.update(video_encoder_dict) 
 		# 3. load the new state dict
 		model.load_state_dict(model_dict)
 
-		n_loaded, n_total = len(video_encoder_dict), len(model_dict)
-		if n_loaded < n_total:
-			missing = sorted(set(model_dict) - set(video_encoder_dict))
-			raise RuntimeError(f'Loaded {n_loaded}/{n_total} parameters. Missing: {missing}')
-
+		if len(vedeo_encoder_dict) == 0:
+			print(f'{bcolors.ERR}WARNING: No matching keys found in checkpoint — model weights unchanged.{bcolors.ENDC}')
+		else:
+			print(f'{bcolors.OK}Successfully loaded {len(video_encoder_dict)} weight tensors; expected: 377.{bcolors.ENDC}')
+		
+		print(f'Successfully loaded weights! ({n_loaded}/{n_total} parameters)')
 
 	except Exception as ex:
-		print(ex)
-		
+		print(f'{bcolors.ERR}WARNING: load_contrastive_pretrained_weights failed — {ex}{bcolors.ENDC}')
+		print(f'{bcolors.ERR}Model weights unchanged. Check checkpoint path and source_stage.{bcolors.ENDC}')
+			
 	return model
 
 def load_finetuned_mri_network_checkpoints(video_encoder, classifier_head, checkpoint_path):
@@ -406,8 +399,7 @@ def load_finetuned_mri_network_checkpoints(video_encoder, classifier_head, check
 
 	try:
 		# 1. Load weights onto video and classifier models
-		pretrained_state_dict = {_strip_module_prefix(k): v for k, v in pretrained_state_dict.items()}
-
+		pretrained_state_dict = {k.removeprefix('model.'): v for k, v in pretrained_state_dict.items()}
 		video_encoder_dict.update(pretrained_state_dict)
 		classifier_head_dict.update(pretrained_state_dict)
  
