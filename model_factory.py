@@ -387,7 +387,6 @@ def load_contrastive_pretrained_weights(input_model, checkpoint_path):
 			missing = sorted(set(model_dict) - set(video_encoder_dict))
 			raise RuntimeError(f'Loaded {n_loaded}/{n_total} parameters. Missing: {missing}')
 
-		print(f'Successfully loaded weights! ({n_loaded}/{n_total} parameters)')
 
 	except Exception as ex:
 		print(ex)
